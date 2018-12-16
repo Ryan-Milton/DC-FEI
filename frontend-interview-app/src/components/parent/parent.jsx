@@ -5,6 +5,8 @@ import KVP from '../../keyvaluestores';
 import Header from '../header';
 import KeyValue from '../keyvalue';
 
+import styles from './parent.scss';
+
 @observer
 class Parent extends React.Component {
 
@@ -51,11 +53,12 @@ class Parent extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Header clicked={this.duplicate.bind(this)}/>
-        {KVP.KVP.all.map( (pair, key) => <KeyValue key={pair.id} id={pair.id} delete={this.delete} keyChange={this.handleKeyChange} valueChange={this.handleValueChange}/>)}
-        <button type='submit' onClick={this.handleSubmit}>Submit</button>
-      </React.Fragment>
+      <div className={styles.card}>
+        <h1 className={styles.parent}>this is the parent component</h1>
+          <Header clicked={this.duplicate.bind(this)} />
+          {KVP.KVP.all.map( (pair, key) => <KeyValue key={pair.id} id={pair.id} delete={this.delete} keyChange={this.handleKeyChange} valueChange={this.handleValueChange}/>)}
+          <button className={styles.button} type='submit' onClick={this.handleSubmit}>Submit</button>
+      </div>
     );
   }
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import styles from './header.scss';
+
 function Header(props) {
   return (
-    <React.Fragment>
-      <h1>I'm a header</h1>
-      <button onClick={props.clicked}>+</button>
+    <React.Fragment >
+      <header className={styles.header}>This is your header<button onClick={props.clicked}>+</button></header>
+      
     </React.Fragment>
   );
 }

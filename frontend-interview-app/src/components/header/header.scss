@@ -17,8 +17,6 @@
   }
 
   button:focus {
-    // outline-offset: 1px;
-    // outline: 3px solid rgba(255,255,255,.2);
     outline: none;
     box-shadow: 0 3px 12px 0 rgba(255,255,255,0.2), 0 3px 12px 0 rgba(255,255,255,0.2), 0 -3px 12px 0 rgba(255,255,255,0.2);
   }

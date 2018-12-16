@@ -1,6 +1,21 @@
 @import 'src/assets/styles/base/baseExport';
+@import '../../../assets/styles/base/variables';
 
-.home {
-  height: 500px;
-  width: 100%;
+
+@media screen and (min-width: 320px) {
+  .home {
+    background-color: $homeBackground;
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    height: -webkit-fill-available;
+    // width: 200%;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .home {
+    height: -webkit-fill-available;
+  }
 }

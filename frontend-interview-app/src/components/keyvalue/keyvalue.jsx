@@ -4,8 +4,8 @@ const KeyValue = (props) => {
   return (
     <React.Fragment>
       <form id={props.id} onSubmit={props.delete}>
-        <input type='text' placeholder='key' onChange={props.change}/>
-        <input type='text' placeholder='value' onChange={props.change}/>
+        <input type='text' name={props.id} placeholder='key' onChange={props.keyChange} />
+        <input type='text' name={props.id} placeholder='value' onChange={props.valueChange}/>
         <button type='submit'>x</button>
       </form>
     </React.Fragment>

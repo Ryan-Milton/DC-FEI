@@ -8,6 +8,7 @@ import { rehydrate, hotRehydrate } from 'rfx-core';
 import * as isProduction from './lib/constants';
 import App from './components/App';
 import stores from './stores/stores'; // eslint-disable-line
+import kvpStores from './keyvaluestores';
 
 // import('./assets/styles/main.scss');
 
@@ -18,7 +19,7 @@ const renderApp = (Component) => {
   render(
     <AppContainer>
       <Router>
-        <Provider store={isProduction ? store : hotRehydrate()}>
+        <Provider kvp={kvpStores.kvp} store={isProduction ? store : hotRehydrate()}>
           <App />
         </Provider>
       </Router>

@@ -1,58 +1,60 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+import KVP from '../../keyvaluestores';
 
 import Header from '../header';
 import KeyValue from '../keyvalue';
 
+@observer
 class Parent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      keyVauePairs: [],
-    };
-  }
 
-  componentWillMount() {
-    this.duplicate();
+  async componentWillMount() {
+    await this.duplicate();
   }
-
+    
   async duplicate() {
-    console.log('duplicate');
     const uuid = require('uuid/v4');
-    if(this.state.keyVauePairs.length === 0 ) {
-      await this.setState({ keyVauePairs: [{
-          id: uuid(),
-          key: '',
-          value: '',
-        } 
-      ]});
-    } else {
-      await this.setState({ keyVauePairs: [...this.state.keyVauePairs, {
-          id: uuid(),
-          key: '',
-          value: '',
-        }
-      ]});
-    }
-    console.log(this.state.keyVauePairs);
+    await KVP.KVP.all.push({
+      id: uuid(),
+      key: '',
+      value: '',
+    });
   }
 
   delete(event) {
     event.preventDefault();
-    let id = event.target.id;
-    console.log(id);
-    let indexes = this.state.keyVauePairs.map( item => item );
-    console.log(indexes.filter( (kvp) => kvp.id === event.target.id));
+    KVP.KVP.all.splice(KVP.KVP.all.findIndex( (kvp) => kvp.id === event.target.id ), 1);
   }
 
-  handleChange(event) {
-    console.log(event.target.id);
+  handleKeyChange(event) {
+    KVP.KVP.all.filter( (kvp) => {
+      if(kvp.id === event.target.name) {
+        kvp.key = event.target.value;
+      }
+    });    
+  }
+
+  handleValueChange(event) {
+    KVP.KVP.all.filter( (kvp) => {
+      if(kvp.id === event.target.name) {
+        kvp.value = event.target.value;
+      }
+    }); 
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    let jsonOutput = {};
+    KVP.KVP.all.forEach( (kvp) => jsonOutput = {...jsonOutput, [kvp.key]: kvp.value });
+    console.log(JSON.stringify(jsonOutput));
   }
 
   render() {
     return (
       <React.Fragment>
         <Header clicked={this.duplicate.bind(this)}/>
-        {this.state.keyVauePairs.map( (pair, key) => <KeyValue id={pair.id} delete={this.delete.bind(this)} change={this.handleChange}/>)}
+        {KVP.KVP.all.map( (pair, key) => <KeyValue key={pair.id} id={pair.id} delete={this.delete} keyChange={this.handleKeyChange} valueChange={this.handleValueChange}/>)}
+        <button type='submit' onClick={this.handleSubmit}>Submit</button>
       </React.Fragment>
     );
   }

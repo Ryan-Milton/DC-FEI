@@ -14,7 +14,17 @@
   ],
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.js",
-    "preview": "pushstate-server ./dist 1234"
+    "preview": "pushstate-server ./dist 1234",
+    "test": "jest"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/home/ryan/Interview Code Challenges/DC-FEI/frontend-interview-app/src/components/parent"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss|less)$": "identity-obj-proxy"
+    }
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -38,6 +48,7 @@
     "fetch-mock": "^6.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.22.0",
+    "identity-obj-proxy": "^3.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "react-hot-loader": "next",
@@ -51,12 +62,16 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "babel-jest": "^23.6.0",
     "classnames": "^2.2.5",
     "css-declaration-sorter": "^2.0.0",
     "css-mqpacker": "^6.0.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "exenv": "^1.2.2",
     "faker": "^4.1.0",
     "font-awesome.css": "^4.7.2",
+    "jest": "^23.6.0",
     "mobx": "^3.2.2",
     "mobx-react": "^4.2.2",
     "mobx-react-devtools": "^4.2.6",
